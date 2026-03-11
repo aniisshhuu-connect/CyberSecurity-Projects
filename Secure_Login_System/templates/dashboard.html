@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0e17; --surface: #111827; --border: #1f2d45;
+      --accent: #00d4ff; --text: #e2e8f0; --muted: #64748b; --success: #10b981;
+    }
+    body {
+      min-height: 100vh; background: var(--bg); color: var(--text);
+      font-family: 'Inter', sans-serif; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 48px 40px; max-width: 480px; width: 100%;
+      text-align: center; position: relative; z-index: 1;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+      animation: fadeUp 0.4s ease both;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px);} to { opacity:1; transform:translateY(0);} }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 10%; right: 10%;
+      height: 2px; background: linear-gradient(90deg, transparent, var(--success), transparent);
+    }
+    .avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; margin: 0 auto 24px; border: 3px solid var(--border);
+    }
+    h1 { font-family: 'Space Mono', monospace; font-size: 22px; margin-bottom: 8px; }
+    .status {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);
+      color: var(--success); font-size: 12px; padding: 4px 12px;
+      border-radius: 99px; margin-bottom: 32px;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px;
+    }
+    .info-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; text-align: left;
+    }
+    .info-card .info-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+    .info-card .info-value { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--text); }
+    a.logout {
+      display: inline-block; padding: 11px 28px;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 8px;
+      font-family: 'Space Mono', monospace; font-size: 13px;
+      text-decoration: none; transition: border-color 0.2s, color 0.2s;
+    }
+    a.logout:hover { border-color: #ef4444; color: #ef4444; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="avatar">👤</div>
+    <h1>Hello, {{ username }}!</h1>
+    <div class="status"><span class="dot"></span> Authenticated</div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-label">Auth Method</div>
+        <div class="info-value">bcrypt hash</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Plain text stored</div>
+        <div class="info-value" style="color:#10b981">Never ✓</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Salt rounds</div>
+        <div class="info-value">12 (2⁴⁰⁹⁶ iters)</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Storage</div>
+        <div class="info-value">SQLite DB</div>
+      </div>
+    </div>
+
+    <a href="/logout" class="logout">→ Sign Out</a>
+  </div>
+</body>
+</html>
