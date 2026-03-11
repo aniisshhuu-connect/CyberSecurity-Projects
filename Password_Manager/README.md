@@ -1,4 +1,4 @@
-# 🔐 Password Manager — Python Beginner Project
+# Password Manager — Python Beginner Project
 
 A simple command-line password manager built in Python.  
 Stores your passwords in a local encrypted file using the `cryptography` library.
